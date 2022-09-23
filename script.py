@@ -3,7 +3,7 @@ import os
 import numpy as np
 import flask
 import pickle
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 #creating instance of the class
 app=Flask(__name__)
@@ -14,6 +14,9 @@ app=Flask(__name__)
 def index():
     return flask.render_template('index.html')
 
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"STATUS":"UP"})
 def ValuePredictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, 4)
     loaded_model = pickle.load(open("checkpoints/model.pkl","rb"))
