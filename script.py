@@ -17,6 +17,8 @@ def index():
 @app.route('/health', methods=['GET'])
 def health():
     return jsonify({"STATUS":"UP"})
+
+
 def ValuePredictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, 4)
     loaded_model = pickle.load(open("checkpoints/model.pkl","rb"))
